@@ -55,9 +55,9 @@ mv GoLand-2019.3.4 ~/GoLand-2019.3.4
 
 echo Setup: Enlist arktos
 
-mkdir -p ~/go/src/k8s.io 
+cd ~
+git clone https://github.com/futurewei-cloud/arktos.git ~/go/src/k8s.io/arktos
 cd ~/go/src/k8s.io
-git clone https://github.com/futurewei-cloud/arktos.git
 ln -s ./arktos kubernetes
 
 ####################
