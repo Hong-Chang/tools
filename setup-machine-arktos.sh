@@ -51,6 +51,10 @@ wget https://download.jetbrains.com/go/goland-2019.3.4.tar.gz
 tar -xzf goland-2019.3.4.tar.gz
 mv GoLand-2019.3.4 ~/GoLand-2019.3.4
 
+echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
+sudo mv ./max_user_watches.conf /etc/sysctl.d/
+sudo sysctl -p --system
+
 ####################
 
 echo Setup: Enlist arktos
@@ -115,6 +119,12 @@ sudo rm -rf /etc/containerd/config.toml
 sudo containerd config default > /tmp/config.toml
 sudo mv /tmp/config.toml /etc/containerd/config.toml
 sudo systemctl restart containerd
+
+####################
+
+echo Setup: Install awscli
+
+sudo apt install awscli -y -q
 
 ####################
 
