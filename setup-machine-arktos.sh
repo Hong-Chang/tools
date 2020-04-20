@@ -130,15 +130,14 @@ sudo apt install awscli -y -q
 
 echo Setup: Setup profile
 
-echo PATH=\"\$HOME/go/src/k8s.io/arktos/third_party/etcd:/usr/local/go/bin:\$HOME/go/bin:\$HOME/go/src/k8s.io/kubernetes/_output/bin:\$PATH\" >> ~/.profile
+echo PATH=\"\$HOME/go/src/k8s.io/arktos/third_party/etcd:/usr/local/go/bin:\$HOME/go/bin:\$HOME/go/src/k8s.io/arktos/_output/bin:\$HOME/go/src/k8s.io/arktos/_output/dockerized/bin/linux/amd64:\$PATH\" >> ~/.profile
 echo GOPATH=\"\$HOME/go\" >> ~/.profile
 echo GOROOT=\"/usr/local/go\" >> ~/.profile
 echo >> ~/.profile
-echo alias arktos=\"cd \$HOME/go/src/arktos\" >> ~/.profile
-echo alias k8s=\"cd \$HOME/go/src/k8s.io/kubernetes\" >> ~/.profile
-echo alias up=\"\$HOME/go/src/k8s.io/kubernetes/hack/arktos-up.sh\" >> ~/.profile
+echo alias arktos=\"cd \$HOME/go/src/k8s.io/arktos\" >> ~/.profile
+echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
-echo cd \$HOME/go/src/k8s.io/kubernetes >> ~/.profile
+echo cd \$HOME/go/src/k8s.io/arktos >> ~/.profile
 
 source "$HOME/.profile"
 
