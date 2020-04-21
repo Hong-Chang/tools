@@ -122,9 +122,10 @@ sudo systemctl restart containerd
 
 ####################
 
-echo Setup: Install awscli
+echo Setup: Install awscli and related
 
 sudo apt install awscli -y -q
+sudo apt install python-pip -y -q
 
 ####################
 
