@@ -122,10 +122,11 @@ sudo systemctl restart containerd
 
 ####################
 
-echo Setup: Install awscli and related
+echo Setup: Install miscellaneous
 
 sudo apt install awscli -y -q
 sudo apt install python-pip -y -q
+sudo apt install jq -y -q
 
 ####################
 
@@ -151,6 +152,13 @@ git clone https://github.com/kubernetes/test-infra.git
 cd ~/go/src/k8s.io/test-infra/
 GO111MODULE=on go install ./kubetest
 GO111MODULE=on go mod vendor
+
+####################
+
+echo Setup: Install Kind
+
+cd ~/go/src/
+GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
 
 ####################
 
