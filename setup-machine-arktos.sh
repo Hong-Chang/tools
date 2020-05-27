@@ -63,6 +63,8 @@ git clone https://github.com/futurewei-cloud/arktos.git ~/go/src/k8s.io/arktos
 cd ~/go/src/k8s.io
 ln -s ./arktos kubernetes
 
+git config --global credential.helper 'cache --timeout=3600000'
+
 ####################
 
 echo Setup: Install etcd
