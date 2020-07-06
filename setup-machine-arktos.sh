@@ -134,7 +134,7 @@ sudo apt install jq -y -q
 echo Setup: Mizar
 
 cd ~
-git clone https://github.com/futurewei-cloud/Mizar
+git clone https://github.com/futurewei-cloud/mizar
 
 ####################
 
