@@ -34,7 +34,7 @@ rm -rf go1.12.12.linux-amd64.tar.gz
 
 echo Setup: Install bazel
 
-sudo apt install g++ unzip zip
+sudo apt install g++ unzip zip -y -q
 sudo apt-get install openjdk-8-jdk -y -q
 cd /tmp
 wget https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh
