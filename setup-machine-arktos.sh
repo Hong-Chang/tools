@@ -131,10 +131,47 @@ sudo apt install jq -y -q
 
 ####################
 
-echo Setup: Mizar
+echo Setup: Install Kind
+
+cd ~/go/src/
+GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
+
+####################
+
+echo Setup: Enlist Mizar
 
 cd ~
 git clone https://github.com/futurewei-cloud/mizar
+
+####################
+
+echo Setup: Mizar Related
+
+cd ~/mizar
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential clang-7 llvm-7 \
+    libelf-dev \
+    python3 \
+    python3-pip \
+    libcmocka-dev \
+    lcov
+
+sudo apt install docker.io
+sudo pip3 install netaddr docker scapy
+sudo systemctl unmask docker.service
+sudo systemctl unmask docker.socket
+sudo systemctl start docker
+sudo systemctl enable docker
+
+sudo docker build -f ./test/Dockerfile -t buildbox:v2 ./test
+
+git submodule update --init --recursive
+
+ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/$ver/kind-$(uname)-amd64
+chmod +x kind
+sudo mv kind /usr/local/bin
 
 ####################
 
@@ -164,13 +201,6 @@ git clone https://github.com/kubernetes/test-infra.git
 cd ~/go/src/k8s.io/test-infra/
 GO111MODULE=on go install ./kubetest
 GO111MODULE=on go mod vendor
-
-####################
-
-echo Setup: Install Kind
-
-cd ~/go/src/
-GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
 
 ####################
 
