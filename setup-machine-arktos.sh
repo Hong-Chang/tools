@@ -149,7 +149,7 @@ echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
 
-echo PYTHONPATH=\"\${PYTHONPATH:-}:/home/ubuntu/mizar/\" >> ~/.profile
+echo PYTHONPATH=\"\$HOME/mizar/\" >> ~/.profile
 
 echo cd \$HOME/go/src/k8s.io/arktos >> ~/.profile
 
