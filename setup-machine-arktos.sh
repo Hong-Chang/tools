@@ -131,6 +131,13 @@ sudo apt install jq -y -q
 
 ####################
 
+echo Setup: Mizar
+
+cd ~
+git clone https://github.com/futurewei-cloud/Mizar
+
+####################
+
 echo Setup: Setup profile
 
 echo PATH=\"\$HOME/go/src/k8s.io/arktos/third_party/etcd:/usr/local/go/bin:\$HOME/go/bin:\$HOME/go/src/k8s.io/arktos/_output/bin:\$HOME/go/src/k8s.io/arktos/_output/dockerized/bin/linux/amd64:\$PATH\" >> ~/.profile
@@ -164,13 +171,6 @@ echo Setup: Install Kind
 
 cd ~/go/src/
 GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
-
-####################
-
-echo Setup: Mizar
-
-cd ~
-git clone https://github.com/futurewei-cloud/Mizar
 
 ####################
 
