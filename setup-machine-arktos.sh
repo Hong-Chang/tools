@@ -138,8 +138,12 @@ echo GOPATH=\"\$HOME/go\" >> ~/.profile
 echo GOROOT=\"/usr/local/go\" >> ~/.profile
 echo >> ~/.profile
 echo alias arktos=\"cd \$HOME/go/src/k8s.io/arktos\" >> ~/.profile
+echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
+
+echo PYTHONPATH=\"\${PYTHONPATH:-}:/home/ubuntu/mizar/\" >> ~/.profile
+
 echo cd \$HOME/go/src/k8s.io/arktos >> ~/.profile
 
 source "$HOME/.profile"
@@ -160,6 +164,13 @@ echo Setup: Install Kind
 
 cd ~/go/src/
 GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
+
+####################
+
+echo Setup: Mizar
+
+cd ~
+git clone https://github.com/futurewei-cloud/Mizar
 
 ####################
 
