@@ -177,6 +177,18 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s http
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
+pip3 install fs
+pip3 install protobuf
+pip3 install grpcio
+pip3 install luigi==2.8.12
+pip3 install kubernetes==11.0.0
+pip3 install rpyc
+pip3 install pyroute2
+pip3 install ipaddress
+pip3 install netaddr
+pip3 install kopf
+pip3 install PyYAML
+
 ####################
 
 echo Setup: Setup profile
