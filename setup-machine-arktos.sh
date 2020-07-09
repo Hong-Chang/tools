@@ -180,6 +180,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 pip3 install fs
 pip3 install protobuf
 pip3 install grpcio
+pip3 install grpcio-tools
 pip3 install luigi==2.8.12
 pip3 install kubernetes==11.0.0
 pip3 install rpyc
@@ -202,7 +203,8 @@ echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
 
-echo PYTHONPATH=\"\$HOME/mizar/\" >> ~/.profile
+echo export PYTHONPATH=\"\$HOME/mizar/\" >> ~/.profile
+echo export GPG_TTY=\$\(tty\) >> ~/.profile
 
 echo cd \$HOME/go/src/k8s.io/arktos >> ~/.profile
 
