@@ -3257,7 +3257,7 @@ class CustomObjectsApi(object):
             _request_timeout=30,
             collection_formats=collection_formats)
 
-def replace_tenant_custom_object_status_with_http_info(self, group, version, tenant, plural, name, body, **kwargs):  # noqa: E501
+    def replace_tenant_custom_object_status_with_http_info(self, group, version, tenant, plural, name, body, **kwargs):  # noqa: E501
         """replace_tenant_custom_object_status  # noqa: E501
 
         replace status of the specified tenant scoped custom object  # noqa: E501
