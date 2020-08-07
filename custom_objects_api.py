@@ -3345,7 +3345,7 @@ class CustomObjectsApi(object):
             body_params = local_var_params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
+            ['application/json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['BearerToken']  # noqa: E501
