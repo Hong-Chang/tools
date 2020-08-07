@@ -3256,3 +3256,112 @@ class CustomObjectsApi(object):
             _preload_content=True,
             _request_timeout=30,
             collection_formats=collection_formats)
+
+def replace_tenant_custom_object_status_with_http_info(self, group, version, tenant, plural, name, body, **kwargs):  # noqa: E501
+        """replace_tenant_custom_object_status  # noqa: E501
+
+        replace status of the specified tenant scoped custom object  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.replace_tenant_custom_object_status_with_http_info(group, version, tenant, plural, name, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str group: the custom resource's group (required)
+        :param str version: the custom resource's version (required)
+        :param str tenant: The custom resource's tenant (required)
+        :param str plural: the custom resource's plural name. For TPRs this would be lowercase plural kind. (required)
+        :param str name: the custom object's name (required)
+        :param UNKNOWN_BASE_TYPE body: (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['group', 'version', 'tenant', 'plural', 'name', 'body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method replace_tenant_custom_object_status" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'group' is set
+        if ('group' not in local_var_params or
+                local_var_params['group'] is None):
+            raise ValueError("Missing the required parameter `group` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+        # verify the required parameter 'version' is set
+        if ('version' not in local_var_params or
+                local_var_params['version'] is None):
+            raise ValueError("Missing the required parameter `version` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+        # verify the required parameter 'tenant' is set
+        if ('tenant' not in local_var_params or
+                local_var_params['tenant'] is None):
+            raise ValueError("Missing the required parameter `tenant` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+        # verify the required parameter 'plural' is set
+        if ('plural' not in local_var_params or
+                local_var_params['plural'] is None):
+            raise ValueError("Missing the required parameter `plural` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+        # verify the required parameter 'name' is set
+        if ('name' not in local_var_params or
+                local_var_params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in local_var_params or
+                local_var_params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `replace_tenant_custom_object_status`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'group' in local_var_params:
+            path_params['group'] = local_var_params['group']  # noqa: E501
+        if 'version' in local_var_params:
+            path_params['version'] = local_var_params['version']  # noqa: E501
+        if 'tenant' in local_var_params:
+            path_params['tenant'] = local_var_params['tenant']  # noqa: E501
+        if 'plural' in local_var_params:
+            path_params['plural'] = local_var_params['plural']  # noqa: E501
+        if 'name' in local_var_params:
+            path_params['name'] = local_var_params['name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in local_var_params:
+            body_params = local_var_params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json', 'application/yaml', 'application/vnd.kubernetes.protobuf'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['BearerToken']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/apis/{group}/{version}/tenants/{tenant}/{plural}/{name}/status', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='object',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
