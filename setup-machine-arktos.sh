@@ -202,6 +202,8 @@ echo alias arktos=\"cd \$HOME/go/src/k8s.io/arktos\" >> ~/.profile
 echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
+echo alias pods=\"kubectl get pods -o wide\" >> ~/.profile
+echo alias nets=\"kubectl get nets; kubectl get droplets; kubectl get bouncers; kubectl get dividers; kubectl get vpcs; kubectl get eps; kubectl get networks\" >> ~/.profile
 
 echo export PYTHONPATH=\"\$HOME/mizar/\" >> ~/.profile
 echo export GPG_TTY=\$\(tty\) >> ~/.profile
