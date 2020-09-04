@@ -8,22 +8,17 @@ service BuiltinsService {
     // If Endpoints are not annotated, there will be many updates from unwanted endpoints.
     rpc CreateService(BuiltinsServiceMessage) returns (ReturnCode) {}
     rpc UpdateService(BuiltinsServiceMessage) returns (ReturnCode) {}
-    rpc ResumeService(BuiltinsServiceMessage) returns (ReturnCode) {}
 
     rpc UpdateServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
-    rpc ResumeServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
     rpc CreateServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
 
-    rpc ResumePod(BuiltinsPodMessage) returns (ReturnCode) {}
     rpc UpdatePod(BuiltinsPodMessage) returns (ReturnCode) {}
     rpc CreatePod(BuiltinsPodMessage) returns (ReturnCode) {}
 
     rpc CreateNode(BuiltinsNodeMessage) returns (ReturnCode) {}
-    rpc ResumeNode(BuiltinsNodeMessage) returns (ReturnCode) {}
     rpc UpdateNode(BuiltinsNodeMessage) returns (ReturnCode) {}
 
     rpc CreateArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
-    rpc ResumeArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
     rpc UpdateArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
 }
 
