@@ -32,7 +32,7 @@ service BuiltinsService {
 
 message BuiltinsNodeMessage {
   string name = 1;
-  string ip = 1;
+  string ip = 2;
 }
 
 message BuiltinsPodMessage {
