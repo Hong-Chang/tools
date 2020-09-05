@@ -8,21 +8,30 @@ service BuiltinsService {
     // If Endpoints are not annotated, there will be many updates from unwanted endpoints.
     rpc CreateService(BuiltinsServiceMessage) returns (ReturnCode) {}
     rpc UpdateService(BuiltinsServiceMessage) returns (ReturnCode) {}
+    rpc ResumeService(BuiltinsServiceMessage) returns (ReturnCode) {}
+    rpc DeleteService(BuiltinsServiceMessage) returns (ReturnCode) {}
 
     rpc UpdateServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
+    rpc ResumeServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
     rpc CreateServiceEndpoint(BuiltinsServiceEndpointMessage) returns (ReturnCode) {}
 
+    rpc ResumePod(BuiltinsPodMessage) returns (ReturnCode) {}
     rpc UpdatePod(BuiltinsPodMessage) returns (ReturnCode) {}
     rpc CreatePod(BuiltinsPodMessage) returns (ReturnCode) {}
+    rpc DeleteService(BuiltinsPodMessage) returns (ReturnCode) {}
 
     rpc CreateNode(BuiltinsNodeMessage) returns (ReturnCode) {}
+    rpc ResumeNode(BuiltinsNodeMessage) returns (ReturnCode) {}
     rpc UpdateNode(BuiltinsNodeMessage) returns (ReturnCode) {}
+    rpc DeleteNode(BuiltinsNodeMessage) returns (ReturnCode) {}
 
     rpc CreateArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
+    rpc ResumeArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
     rpc UpdateArktosNetwork(BuiltinsArktosMessage) returns (ReturnCode) {}
 }
 
 message BuiltinsNodeMessage {
+  string name = 1;
   string ip = 1;
 }
 
@@ -37,12 +46,11 @@ message BuiltinsPodMessage {
 }
 
 message BuiltinsServiceMessage {
-  string arktos_network = 1;
-  string name = 2;
+  string name = 1;
+  string arktos_network = 2;
   string namespace = 3;
   string tenant = 4;
   string ip = 5;
-  ReturnCode return_code = 6;
 }
 
 message BuiltinsServiceEndpointMessage {
@@ -52,7 +60,8 @@ message BuiltinsServiceEndpointMessage {
 }
 
 message BuiltinsArktosMessage {
-  string vpc = 1;
+  string name = 1;
+  string vpc = 2;
 }
 
 message PortsMessage {
