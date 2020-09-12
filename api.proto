@@ -1,5 +1,5 @@
 syntax = "proto3";
-package mizarcontrollers;
+package mizar;
 
 // May need to return a code in the event of a temporary failure for retry.
 service BuiltinsService {
@@ -40,7 +40,7 @@ message BuiltinsPodMessage {
   string host_ip = 2;
   string namespace = 3;
   string tenant = 4;
-  string vpc = 5;
+  string arktos_network = 5;
   string phase = 6;
   repeated InterfacesMessage interfaces = 7;
 }
