@@ -60,7 +60,7 @@ message BuiltinsServiceEndpointMessage {
   repeated string backend_ips = 4;
   repeated PortsMessage ports = 5;
   string backend_ips_json = 6;
-  string ports_json = 7
+  string ports_json = 7;
 }
 
 message BuiltinsArktosMessage {
