@@ -199,6 +199,7 @@ echo GOPATH=\"\$HOME/go\" >> ~/.profile
 echo GOROOT=\"/usr/local/go\" >> ~/.profile
 echo >> ~/.profile
 echo alias arktos=\"cd \$HOME/go/src/k8s.io/arktos\" >> ~/.profile
+echo alias k8s=\"cd \$HOME/go/src/k8s.io/kubernetes\" >> ~/.profile
 echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
