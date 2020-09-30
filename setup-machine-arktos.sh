@@ -59,7 +59,7 @@ sudo sysctl -p --system
 echo Setup: Enlist arktos
 
 cd ~
-git clone https://github.com/futurewei-cloud/arktos.git ~/go/src/k8s.io/arktos
+git clone https://github.com/centaurus-cloud/arktos.git ~/go/src/k8s.io/arktos
 cd ~/go/src/k8s.io
 ln -s ./arktos kubernetes
 
@@ -141,7 +141,7 @@ GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
 echo Setup: Enlist Mizar
 
 cd ~
-git clone https://github.com/futurewei-cloud/mizar
+git clone https://github.com/centaurus-cloud/mizar
 
 ####################
 
