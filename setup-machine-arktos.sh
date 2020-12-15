@@ -215,7 +215,7 @@ echo alias k8s=\"cd \$HOME/go/src/k8s.io/kubernetes\" >> ~/.profile
 echo alias mizar=\"cd \$HOME/mizar\" >> ~/.profile
 echo alias up=\"\$HOME/go/src/k8s.io/arktos/hack/arktos-up.sh\" >> ~/.profile
 echo alias status=\"git status\" >> ~/.profile
-echo alias pods=\"kubectl get pods -AT -o wide\" >> ~/.profile
+echo alias pods=\"kubectl get pods -A -o wide\" >> ~/.profile
 echo alias nets=\"echo 'kubectl get subnets'\; kubectl get subnets\; echo\; echo 'kubectl get droplets'\; kubectl get droplets\; echo\; echo 'kubectl get bouncers'\; kubectl get bouncers\; echo\; echo 'kubectl get dividers'\; kubectl get dividers\; echo\; echo 'kubectl get vpcs'\; kubectl get vpcs\; echo\; echo 'kubectl get eps'\; kubectl get eps\; echo\; echo 'kubectl get networks'\; kubectl get networks\" >> ~/.profile
 
 echo export PYTHONPATH=\"\$HOME/mizar/\" >> ~/.profile
