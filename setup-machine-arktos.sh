@@ -21,14 +21,14 @@ echo xfce4-session >~/.xsession
 
 ####################
 
-echo Setup: Install go \(currently limited to version 1.12.12\)
+echo Setup: Install go \(currently limited to version 1.13.9\)
 
 sudo apt-get update -y -q
 
 cd /tmp
-wget https://dl.google.com/go/go1.12.12.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.12.12.linux-amd64.tar.gz
-rm -rf go1.12.12.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.13.9.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.13.9.linux-amd64.tar.gz
+rm -rf go1.13.9.linux-amd64.tar.gz
 
 ####################
 
