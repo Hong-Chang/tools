@@ -48,56 +48,56 @@ echo Setup: Enlist Mizar
 cd ~
 git clone https://github.com/CentaurusInfra/mizar
 
-####################
+# ####################
 
-echo Setup: Mizar Related
+# echo Setup: Mizar Related
 
-cd ~/mizar
-sudo apt-get update
-sudo apt-get install -y \
-    build-essential clang-7 llvm-7 \
-    libelf-dev \
-    python3 \
-    python3-pip \
-    libcmocka-dev \
-    lcov
+# cd ~/mizar
+# sudo apt-get update
+# sudo apt-get install -y \
+#     build-essential clang-7 llvm-7 \
+#     libelf-dev \
+#     python3 \
+#     python3-pip \
+#     libcmocka-dev \
+#     lcov
 
 
-sudo docker build -f ./test/Dockerfile -t buildbox:v2 ./test
+# sudo docker build -f ./test/Dockerfile -t buildbox:v2 ./test
 
-ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
-curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/$ver/kind-$(uname)-amd64
-chmod +x kind
-sudo mv kind /usr/local/bin
+# ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+# curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/$ver/kind-$(uname)-amd64
+# chmod +x kind
+# sudo mv kind /usr/local/bin
 
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
+# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+# chmod +x ./kubectl
+# sudo mv ./kubectl /usr/local/bin/kubectl
 
-pip3 install fs
-pip3 install protobuf
-pip3 install grpcio
-pip3 install grpcio-tools
-pip3 install luigi==2.8.12
-pip3 install kubernetes==11.0.0
-pip3 install rpyc
-pip3 install pyroute2
-pip3 install ipaddress
-pip3 install netaddr
-pip3 install kopf
-pip3 install PyYAML
+# pip3 install fs
+# pip3 install protobuf
+# pip3 install grpcio
+# pip3 install grpcio-tools
+# pip3 install luigi==2.8.12
+# pip3 install kubernetes==11.0.0
+# pip3 install rpyc
+# pip3 install pyroute2
+# pip3 install ipaddress
+# pip3 install netaddr
+# pip3 install kopf
+# pip3 install PyYAML
 
-####################
+# ####################
 
-echo Setup: Change Containerd
+# echo Setup: Change Containerd
 
-wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
-chmod +x /tmp/containerd
-sudo systemctl stop containerd
-sudo mv /usr/bin/containerd /usr/bin/containerd.bak
-sudo mv /tmp/containerd /usr/bin/
-sudo systemctl restart containerd
-sudo systemctl start docker
+# wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
+# chmod +x /tmp/containerd
+# sudo systemctl stop containerd
+# sudo mv /usr/bin/containerd /usr/bin/containerd.bak
+# sudo mv /tmp/containerd /usr/bin/
+# sudo systemctl restart containerd
+# sudo systemctl start docker
 
 ####################
 
