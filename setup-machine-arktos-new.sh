@@ -9,6 +9,10 @@ GOLANG_VERSION=${GOLANG_VERSION:-"1.13.9"}
 echo "Update apt."
 sudo apt -y update
 
+echo "Install golang."
+wget https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz -P /tmp
+sudo tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz
+
 echo "Install docker."
 sudo apt -y install docker.io
 sudo gpasswd -a $USER docker
@@ -17,10 +21,6 @@ echo "Install make & gcc."
 sudo apt -y install make
 sudo apt -y install gcc
 sudo apt -y install jq
-
-echo "Install golang."
-wget https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz -P /tmp
-sudo tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
 ####################
 
@@ -85,15 +85,15 @@ pip3 install PyYAML
 
 # ####################
 
-# echo Setup: Change Containerd
+echo Setup: Change Containerd
 
-# wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
-# chmod +x /tmp/containerd
-# sudo systemctl stop containerd
-# sudo mv /usr/bin/containerd /usr/bin/containerd.bak
-# sudo mv /tmp/containerd /usr/bin/
-# sudo systemctl restart containerd
-# sudo systemctl start docker
+wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
+chmod +x /tmp/containerd
+sudo systemctl stop containerd
+sudo mv /usr/bin/containerd /usr/bin/containerd.bak
+sudo mv /tmp/containerd /usr/bin/
+sudo systemctl restart containerd
+sudo systemctl start docker
 
 ####################
 
