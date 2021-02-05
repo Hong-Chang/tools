@@ -2,22 +2,22 @@
 
 ####################
 
-echo Setup: Enable password login
+# echo Setup: Enable password login
 
-sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-### Set password: sudo passwd ubuntu
-sudo service sshd restart
+# sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+# ### Set password: sudo passwd ubuntu
+# sudo service sshd restart
 
 ####################
 
-echo Setup: Install remote desktop
+# echo Setup: Install remote desktop
 
-sudo apt update
-sudo apt install -y ubuntu-desktop xrdp
+# sudo apt update
+# sudo apt install -y ubuntu-desktop xrdp
 
-sudo service xrdp restart
-sudo apt install -y xfce4 xfce4-goodies
-echo xfce4-session >~/.xsession
+# sudo service xrdp restart
+# sudo apt install -y xfce4 xfce4-goodies
+# echo xfce4-session >~/.xsession
 
 ####################
 
@@ -43,16 +43,16 @@ chmod +x bazel-0.26.1-installer-linux-x86_64.sh
 
 ####################
 
-echo Setup: Install goland
+# echo Setup: Install goland
 
-cd /tmp
-wget https://download.jetbrains.com/go/goland-2019.3.4.tar.gz
-tar -xzf goland-2019.3.4.tar.gz
-mv GoLand-2019.3.4 ~/GoLand-2019.3.4
+# cd /tmp
+# wget https://download.jetbrains.com/go/goland-2019.3.4.tar.gz
+# tar -xzf goland-2019.3.4.tar.gz
+# mv GoLand-2019.3.4 ~/GoLand-2019.3.4
 
-echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
-sudo mv ./max_user_watches.conf /etc/sysctl.d/
-sudo sysctl -p --system
+# echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
+# sudo mv ./max_user_watches.conf /etc/sysctl.d/
+# sudo sysctl -p --system
 
 ####################
 
@@ -173,15 +173,15 @@ pip3 install PyYAML
 
 ####################
 
-echo Setup: Change Containerd
+# echo Setup: Change Containerd
 
-wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
-chmod +x /tmp/containerd
-sudo systemctl stop containerd
-sudo mv /usr/bin/containerd /usr/bin/containerd.bak
-sudo mv /tmp/containerd /usr/bin/
-sudo systemctl restart containerd
-sudo systemctl start docker
+# wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
+# chmod +x /tmp/containerd
+# sudo systemctl stop containerd
+# sudo mv /usr/bin/containerd /usr/bin/containerd.bak
+# sudo mv /tmp/containerd /usr/bin/
+# sudo systemctl restart containerd
+# sudo systemctl start docker
 
 ####################
 
