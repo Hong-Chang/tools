@@ -70,18 +70,18 @@ curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/$ver/kin
 chmod +x kind
 sudo mv kind /usr/local/bin
 
-# pip3 install fs
-# pip3 install protobuf
-# pip3 install grpcio
-# pip3 install grpcio-tools
-# pip3 install luigi==2.8.12
-# pip3 install kubernetes==11.0.0
-# pip3 install rpyc
-# pip3 install pyroute2
-# pip3 install ipaddress
-# pip3 install netaddr
-# pip3 install kopf
-# pip3 install PyYAML
+pip3 install fs
+pip3 install protobuf
+pip3 install grpcio
+pip3 install grpcio-tools
+pip3 install luigi==2.8.12
+pip3 install kubernetes==11.0.0
+pip3 install rpyc
+pip3 install pyroute2
+pip3 install ipaddress
+pip3 install netaddr
+pip3 install kopf
+pip3 install PyYAML
 
 # ####################
 
