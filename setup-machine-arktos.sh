@@ -50,9 +50,9 @@ chmod +x bazel-0.26.1-installer-linux-x86_64.sh
 # tar -xzf goland-2019.3.4.tar.gz
 # mv GoLand-2019.3.4 ~/GoLand-2019.3.4
 
-# echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
-# sudo mv ./max_user_watches.conf /etc/sysctl.d/
-# sudo sysctl -p --system
+echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
+sudo mv ./max_user_watches.conf /etc/sysctl.d/
+sudo sysctl -p --system
 
 ####################
 
