@@ -134,6 +134,12 @@ sudo apt-get install -y \
     build-essential clang-7 llvm-7 \
     libelf-dev \
     python3 \
+sudo apt install -y software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.8
+sudo ln -sfn /usr/bin/python3.8 /usr/bin/python3
+sudo apt-get install -y \
     python3-pip \
     libcmocka-dev \
     lcov
