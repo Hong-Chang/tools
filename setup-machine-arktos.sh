@@ -137,7 +137,7 @@ sudo apt-get install -y \
 sudo apt install -y software-properties-common
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.8
+sudo apt install -y python3.8
 sudo ln -sfn /usr/bin/python3.8 /usr/bin/python3
 sudo apt-get install -y \
     python3-pip \
