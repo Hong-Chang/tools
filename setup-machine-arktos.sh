@@ -21,26 +21,6 @@
 
 ####################
 
-echo Setup: Install kopf
-
-sudo apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-wget -O /home/ubuntu/Python-3.8.8.tgz https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz
-tar -xzf /home/ubuntu/Python-3.8.8.tgz
-cd /home/ubuntu/Python-3.8.8
-./configure
-make
-sudo make install
-sudo ln -sfn /usr/local/bin/python3.8 /usr/bin/python3
-sudo apt remove -fy python3-apt
-sudo apt install -fy python3-apt
-sudo apt update
-sudo apt install -y python3-pip
-/usr/local/bin/python3.8 -m pip install --upgrade pip
-sudo sed -i '1c\#!/usr/bin/python3.8 -Es' /usr/bin/lsb_release
-pip3 install kopf
-
-####################
-
 echo Setup: Install go \(currently limited to version 1.13.9\)
 
 sudo apt-get update -y -q
