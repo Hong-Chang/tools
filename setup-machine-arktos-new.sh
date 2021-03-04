@@ -2,25 +2,57 @@
 
 ####################
 
-echo Setup: From arktos/master/hack/setup-dev-node.sh
+# echo Setup: Enable password login
 
-GOLANG_VERSION=${GOLANG_VERSION:-"1.13.9"}
+# sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+# ### Set password: sudo passwd ubuntu
+# sudo service sshd restart
 
-echo "Update apt."
-sudo apt -y update
+####################
 
-echo "Install golang."
-wget https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz -P /tmp
-sudo tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz
+# echo Setup: Install remote desktop
 
-echo "Install docker."
-sudo apt -y install docker.io
-sudo gpasswd -a $USER docker
+# sudo apt update
+# sudo apt install -y ubuntu-desktop xrdp
 
-echo "Install make & gcc."
-sudo apt -y install make
-sudo apt -y install gcc
-sudo apt -y install jq
+# sudo service xrdp restart
+# sudo apt install -y xfce4 xfce4-goodies
+# echo xfce4-session >~/.xsession
+
+####################
+
+echo Setup: Install go \(currently limited to version 1.13.9\)
+
+sudo apt-get update -y -q
+
+cd /tmp
+wget https://dl.google.com/go/go1.13.9.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.13.9.linux-amd64.tar.gz
+rm -rf go1.13.9.linux-amd64.tar.gz
+
+####################
+
+echo Setup: Install bazel
+
+sudo apt install g++ unzip zip -y -q
+sudo apt-get install openjdk-8-jdk -y -q
+cd /tmp
+wget https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh
+chmod +x bazel-0.26.1-installer-linux-x86_64.sh
+./bazel-0.26.1-installer-linux-x86_64.sh --user
+
+####################
+
+# echo Setup: Install goland
+
+# cd /tmp
+# wget https://download.jetbrains.com/go/goland-2019.3.4.tar.gz
+# tar -xzf goland-2019.3.4.tar.gz
+# mv GoLand-2019.3.4 ~/GoLand-2019.3.4
+
+echo fs.inotify.max_user_watches=524288 > ./max_user_watches.conf
+sudo mv ./max_user_watches.conf /etc/sysctl.d/
+sudo sysctl -p --system
 
 ####################
 
@@ -35,11 +67,69 @@ git config --global credential.helper 'cache --timeout=3600000'
 
 ####################
 
+echo Setup: Install etcd
+
+cd ~/go/src/k8s.io/arktos/
+git tag v1.15.0
+./hack/install-etcd.sh
+
+####################
+
+echo Setup: Install Docker
+
+sudo apt -y install docker.io
+sudo gpasswd -a $USER docker
+
+####################
+
+echo Setup: Install crictl
+
+cd /tmp
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.17.0/crictl-v1.17.0-linux-amd64.tar.gz
+sudo tar zxvf crictl-v1.17.0-linux-amd64.tar.gz -C /usr/local/bin 
+rm -f crictl-v1.17.0-linux-amd64.tar.gz 
+
+touch /tmp/crictl.yaml
+echo runtime-endpoint: unix:///run/containerd/containerd.sock >> /tmp/crictl.yaml
+echo image-endpoint: unix:///run/containerd/containerd.sock >> /tmp/crictl.yaml
+echo timeout: 10 >> /tmp/crictl.yaml
+echo debug: true >> /tmp/crictl.yaml
+sudo mv /tmp/crictl.yaml /etc/crictl.yaml
+
+mkdir -p /etc/containerd
+sudo rm -rf /etc/containerd/config.toml
+sudo containerd config default > /tmp/config.toml
+sudo mv /tmp/config.toml /etc/containerd/config.toml
+sudo systemctl restart containerd
+
+####################
+
 echo Setup: Install miscellaneous
 
+sudo apt-get install -y -q libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+wget -O /home/ubuntu/Python-3.8.8.tgz https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz
+tar -C /home/ubuntu -xzf /home/ubuntu/Python-3.8.8.tgz
+cd /home/ubuntu/Python-3.8.8
+sudo ./configure
+sudo make
+sudo make install
+sudo ln -sfn /usr/local/bin/python3.8 /usr/bin/python3
+sudo apt remove -fy python3-apt
+sudo apt install -fy python3-apt
+sudo apt update
+sudo apt install -fy python3-pip
+sudo sed -i '1c\#!/usr/bin/python3.8 -Es' /usr/bin/lsb_release
+sudo usr/local/bin/python3.8 -m pip install --upgrade pip -y -q
+
 sudo apt install awscli -y -q
-sudo apt install python-pip -y -q
 sudo apt install jq -y -q
+
+####################
+
+echo Setup: Install Kind
+
+cd ~/go/src/
+GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0
 
 ####################
 
@@ -48,7 +138,7 @@ echo Setup: Enlist Mizar
 cd ~
 git clone https://github.com/CentaurusInfra/mizar
 
-# ####################
+####################
 
 echo Setup: Mizar Related
 
@@ -62,38 +152,50 @@ sudo apt-get install -y \
     libcmocka-dev \
     lcov
 
+sudo apt install docker.io
+sudo pip3 install netaddr docker scapy
+sudo systemctl unmask docker.service
+sudo systemctl unmask docker.socket
+sudo systemctl start docker
+sudo systemctl enable docker
 
 sudo docker build -f ./test/Dockerfile -t buildbox:v2 ./test
+
+git submodule update --init --recursive
 
 ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
 curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/$ver/kind-$(uname)-amd64
 chmod +x kind
 sudo mv kind /usr/local/bin
 
-pip3 install fs
-pip3 install protobuf
-pip3 install grpcio
-pip3 install grpcio-tools
-pip3 install luigi==2.8.12
-pip3 install kubernetes==11.0.0
-pip3 install rpyc
-pip3 install pyroute2
-pip3 install ipaddress
-pip3 install netaddr
-pip3 install kopf
-pip3 install PyYAML
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 
-# ####################
+sudo pip3 install fs
+sudo pip3 install protobuf
+sudo pip3 install grpcio
+sudo pip3 install grpcio-tools
+sudo pip3 install luigi==2.8.12
+sudo pip3 install kubernetes==11.0.0
+sudo pip3 install rpyc
+sudo pip3 install pyroute2
+sudo pip3 install ipaddress
+sudo pip3 install netaddr
+sudo pip3 install kopf
+sudo pip3 install PyYAML
 
-echo Setup: Change Containerd
+####################
 
-wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
-chmod +x /tmp/containerd
-sudo systemctl stop containerd
-sudo mv /usr/bin/containerd /usr/bin/containerd.bak
-sudo mv /tmp/containerd /usr/bin/
-sudo systemctl restart containerd
-sudo systemctl start docker
+# echo Setup: Change Containerd
+
+# wget -qO- https://github.com/futurewei-cloud/containerd/releases/download/tenant-cni-args/containerd.zip | zcat > /tmp/containerd
+# chmod +x /tmp/containerd
+# sudo systemctl stop containerd
+# sudo mv /usr/bin/containerd /usr/bin/containerd.bak
+# sudo mv /tmp/containerd /usr/bin/
+# sudo systemctl restart containerd
+# sudo systemctl start docker
 
 ####################
 
