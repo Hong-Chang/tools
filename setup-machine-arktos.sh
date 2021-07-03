@@ -151,7 +151,8 @@ sudo apt-get install -y \
     python3-pip \
     libcmocka-dev \
     lcov \
-    protobuf-compiler
+    protobuf-compiler \
+    libprotobuf-dev
 
 GO111MODULE="on" go get google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
 GO111MODULE="on" go get google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
